@@ -33,23 +33,19 @@ Two state-of-the-art networks are implemented, namely `Coarse-Fine CNN` and `SHA
 Please read the paper(s) for more information.
 
 ### SHARPNet
-`sharp_net` package contains the implementation of the model described in [this paper](https://www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123690035.pdf). This is the approach that is finally used in this work since the previous one is not capable of working in real-time, due to the fact that it needs (depth and amplitude) inputs acquired with different modulation frequencies.  
+`sharp_net` package contains the implementation of the model described in [this paper](https://www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123690035.pdf). Since we are interested in a single modulation frequency method, this is the approach that is finally used in this work.
 Please find more details about the algorithm in the linked paper. 
 
 ***
 
 ## Point-Cloud Registration
-`pcd_registration` package contains the code for the point-cloud registration between a 3D satellite model target and the source acquired one. Four state-of-the-art models are currently taken into account to perform this final task, namely `Fast Global Registration (FGR)`, `FPFH + RANSAC Registration (FRR)`, `3DRegNet` and `Feature-Metric Registration (FMR)`.
+`pcd_registration` package contains the code for the point-cloud registration between a 3D satellite model target and the source acquired one. Three state-of-the-art models are currently taken into account to perform this final task, namely `Fast Global Registration (FGR)`, `FPFH + RANSAC Registration (FRR)`, and `Feature-Metric Registration (FMR)`.
 
 ### FGR
 `fast_global_registration.py` implements the fast global registration approach, that is described [here](http://vladlen.info/papers/fast-global-registration.pdf). It achieves state-of-the-art results for what concerns Optimization-Based methods. 
 
 ### FRR (FPFH + RANSAC Registration)
 `global_registration.py` approach uses FTFH features extraction as described [here](https://www.cvl.iis.u-tokyo.ac.jp/class2016/2016w/papers/6.3DdataProcessing/Rusu_FPFH_ICRA2009.pdf), followed by the classical RANSAC method presented in [this paper](http://www.cs.ait.ac.th/~mdailey/cvreadings/Fischler-RANSAC.pdf). This model has been chosen to be the representative of Feature-Learning methods, due to its simplicity and yet its effectiveness.
-
-### 3DRegnet
-`3dregnet` package implements the model presented in [this paper](https://arxiv.org/pdf/1904.01701v1.pdf), which outperforms other state-of-the-art End-to-End Learning-Based methods. Unfortunately, it presents several drawbacks when applied to "real-world" point clouds (same shape between the source and target, initial rotation and translation information have to be provided, etc,), therefore the model finally chosen for this article is `FMR`.  
-Please find more details concerning the algorithm in the linked paper. 
 
 ### FMR
 `fmr` package contains the code for the implementation of the algorithm described [here](https://arxiv.org/pdf/2005.01014.pdf). The strength of this method relies on its robustness to noise, outliers and density difference (in contrast with "geometric" methods as the ones previously introduced), its fastness and it high accuracy.  
