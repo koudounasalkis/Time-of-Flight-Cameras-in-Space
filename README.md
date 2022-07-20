@@ -33,7 +33,7 @@ Two state-of-the-art networks are implemented, namely `Coarse-Fine CNN` and `SHA
 Please read the paper(s) for more information.
 
 ### SHARPNet
-`sharp_net` package contains the implementation of the model described in [this paper](https://www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123690035.pdf). This is the approach that is finally used in this thesis work since the previous one is not capable of working in real-time, due to the fact that it needs (depth and amplitude) inputs acquired with different modulation frequencies.  
+`sharp_net` package contains the implementation of the model described in [this paper](https://www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123690035.pdf). This is the approach that is finally used in this work since the previous one is not capable of working in real-time, due to the fact that it needs (depth and amplitude) inputs acquired with different modulation frequencies.  
 Please find more details about the algorithm in the linked paper. 
 
 ***
@@ -48,7 +48,7 @@ Please find more details about the algorithm in the linked paper.
 `global_registration.py` approach uses FTFH features extraction as described [here](https://www.cvl.iis.u-tokyo.ac.jp/class2016/2016w/papers/6.3DdataProcessing/Rusu_FPFH_ICRA2009.pdf), followed by the classical RANSAC method presented in [this paper](http://www.cs.ait.ac.th/~mdailey/cvreadings/Fischler-RANSAC.pdf). This model has been chosen to be the representative of Feature-Learning methods, due to its simplicity and yet its effectiveness.
 
 ### 3DRegnet
-`3dregnet` package implements the model presented in [this paper](https://arxiv.org/pdf/1904.01701v1.pdf), which outperforms other state-of-the-art End-to-End Learning-Based methods. Unfortunately, it presents several drawbacks when applied to "real-world" point clouds (same shape between the source and target, initial rotation and translation information have to be provided, etc,), therefore the model finally chosen for this thesis work is `FMR`.  
+`3dregnet` package implements the model presented in [this paper](https://arxiv.org/pdf/1904.01701v1.pdf), which outperforms other state-of-the-art End-to-End Learning-Based methods. Unfortunately, it presents several drawbacks when applied to "real-world" point clouds (same shape between the source and target, initial rotation and translation information have to be provided, etc,), therefore the model finally chosen for this article is `FMR`.  
 Please find more details concerning the algorithm in the linked paper. 
 
 ### FMR
@@ -60,11 +60,11 @@ Please find more information about the model in the relative paper.
 ## Results
 
 ### Denoising Approaches
-To reduce the complexity of the proposed SHARP-Net, two variants ar	e proposed, ToF-KPN (based on a U-Net model built upon an autoencoder with skip connections) and a reduced version of SHARP-Net without the last two blocks.   
+To reduce the complexity of the proposed SHARP-Net, two variants are proposed, ToF-KPN (based on a U-Net model built upon an autoencoder with skip connections) and a reduced version of SHARP-Net without the last two blocks.   
 The following images show the results of the denoising approaches: ToF-KPN always obtains the worst outcomes, while the two variants of SHARP-Net get very similar ones.
 
-![Denoised Depth Images](results/denoising/Denoised%20Depth%20Images.png)
-![Denoised Point Clouds](results/denoising/Denoised%20Point%20Clouds.png)
+![Denoised Depth Images](results/denoising/denoised_depth_images.png)
+![Denoised Point Clouds](results/denoising/denoised_point_clouds.png)
 
 By considering the execution times, ToF-KPN is always the fastest, being the simplest model. The original SHARP-Net is the slowest, while its smaller variant achieves very good results in almost half the time required by SHARP-Net.  
 Thus, its low complexity, its online performance and the optimal results make it a perfect candidate for this work.
