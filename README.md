@@ -63,8 +63,8 @@ Please find more information about the model in the relative paper.
 To reduce the complexity of the proposed SHARP-Net, two variants ar	e proposed, ToF-KPN (based on a U-Net model built upon an autoencoder with skip connections) and a reduced version of SHARP-Net without the last two blocks.   
 The following images show the results of the denoising approaches: ToF-KPN always obtains the worst outcomes, while the two variants of SHARP-Net get very similar ones.
 
-![Denoised Depth Images](https://github.com/koudounasalkis/Master-Thesis/blob/main/results/denoising/Denoised%20Depth%20Images.png)
-![Denoised Point Clouds](https://github.com/koudounasalkis/Master-Thesis/blob/main/results/denoising/Denoised%20Point%20Clouds.png)
+![Denoised Depth Images](results/denoising/Denoised%20Depth%20Images.png)
+![Denoised Point Clouds](results/denoising/Denoised%20Point%20Clouds.png)
 
 By considering the execution times, ToF-KPN is always the fastest, being the simplest model. The original SHARP-Net is the slowest, while its smaller variant achieves very good results in almost half the time required by SHARP-Net.  
 Thus, its low complexity, its online performance and the optimal results make it a perfect candidate for this work.
@@ -72,9 +72,9 @@ Thus, its low complexity, its online performance and the optimal results make it
 ### PCD Registration Approaches
 Several starting poses for the source and different sizes for the target are considered to evaluate the performance and the robustness of the registration approaches. Feature-Metric Registration clearly outperforms all the others regardless of the starting position of the source point cloud and the dimensionality of the target one. 
 
-![PCD Registration Pose 1](https://github.com/koudounasalkis/Master-Thesis/blob/main/results/pcd_registration/pose1.png)
-![PCD Registration Pose 2](https://github.com/koudounasalkis/Master-Thesis/blob/main/results/pcd_registration/pose2.png)
-![PCD Registration Pose 3](https://github.com/koudounasalkis/Master-Thesis/blob/main/results/pcd_registration/pose3.png)
+![PCD Registration Pose 1](results/pcd_registration/pose1.png)
+![PCD Registration Pose 2](results/pcd_registration/pose2.png)
+![PCD Registration Pose 3](results/pcd_registration/pose3.png)
 
 FMR always gets the best results while still being incredibly fast: it only takes less than 0.4 seconds to converge with relatively small point clouds (as the ones obtained by the camera used in this work).  
 Its optimal results, coupled with the low complexity and the online performance, definitely prove the choice that has been made about this algorithm.
