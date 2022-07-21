@@ -9,7 +9,7 @@ Please note that the project is based on `Python v3.8.12`, `TensorFlow v2.6.0` a
 ## Data Acquisition
 In order to make this code works, after having downloaded the software from the official site, the right `.zip` folder has to be extracted and placed into this one, so that `_roypy.so` image can be found by the scripts.
 
-`utils` package contains the scripts for acquiring data in real-time, using both Open3D for point cloud drawings and OpenCV for depth maps and amplitude images visualization.   
+`utils` folder contains the scripts for acquiring data in real-time, using both Open3D for point cloud drawings and OpenCV for depth maps and amplitude images visualization.   
 
 ### OpenCV
 `camera_imagedata.py` script captures image data, filling OpenCV images and displaying data with HighGUI.  
@@ -25,21 +25,21 @@ Please find more details about the library [here](http://www.open3d.org/docs/rel
 ***
 
 ## MPI and Shot Denoising
-`mpi_denoising` package contains the code for denoising the data acquired through the camera. In particular, shot and MPI denoising are performed.
+`mpi_denoising` folder contains the code for denoising the data acquired through the camera. In particular, shot and MPI denoising are performed.
 Two state-of-the-art networks are implemented, namely `Coarse-Fine CNN` and `SHARPNet`.
 
 ### Coarse-Fine CNN
-`coarse_fine_cnn` package contains a model that is a hybrid implementation of the network (and the data augmentation strategy) described in [this paper](https://lttm.dei.unipd.it/paper_data/MPI_CNN/CNN_for_MPI-eccvw18.pdf) and the one available at [this paper](https://openaccess.thecvf.com/content_CVPR_2019/supplemental/Agresti_Unsupervised_Domain_Adaptation_CVPR_2019_supplemental.pdf), and it is built thanks to the useful insights provided by the author of the papers, Gianluca Agresti.  
+`coarse_fine_cnn` folder contains a model that is a hybrid implementation of the network (and the data augmentation strategy) described in [this paper](https://lttm.dei.unipd.it/paper_data/MPI_CNN/CNN_for_MPI-eccvw18.pdf) and the one available at [this paper](https://openaccess.thecvf.com/content_CVPR_2019/supplemental/Agresti_Unsupervised_Domain_Adaptation_CVPR_2019_supplemental.pdf), and it is built thanks to the useful insights provided by the author of the papers, Gianluca Agresti.  
 Please read the paper(s) for more information.
 
 ### SHARPNet
-`sharp_net` package contains the implementation of the model described in [this paper](https://www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123690035.pdf). Since we are interested in a single modulation frequency method, this is the approach that is finally used in this work.
+`sharp_net` folder contains the implementation of the model described in [this paper](https://www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123690035.pdf). Since we are interested in a single modulation frequency method, this is the approach that is finally used in this work.
 Please find more details about the algorithm in the linked paper. 
 
 ***
 
 ## Point-Cloud Registration
-`pcd_registration` package contains the code for the point-cloud registration between a 3D satellite model target and the source acquired one. Three state-of-the-art models are currently taken into account to perform this final task, namely `Fast Global Registration (FGR)`, `FPFH + RANSAC Registration (FRR)`, and `Feature-Metric Registration (FMR)`.
+`pcd_registration` folder contains the code for the point-cloud registration between a 3D satellite model target and the source acquired one. Three state-of-the-art models are currently taken into account to perform this final task, namely `Fast Global Registration (FGR)`, `FPFH + RANSAC Registration (FRR)`, and `Feature-Metric Registration (FMR)`.
 
 ### FGR
 `fast_global_registration.py` implements the fast global registration approach, that is described [here](http://vladlen.info/papers/fast-global-registration.pdf). It achieves state-of-the-art results for what concerns Optimization-Based methods. 
@@ -48,7 +48,7 @@ Please find more details about the algorithm in the linked paper.
 `global_registration.py` approach uses FTFH features extraction as described [here](https://www.cvl.iis.u-tokyo.ac.jp/class2016/2016w/papers/6.3DdataProcessing/Rusu_FPFH_ICRA2009.pdf), followed by the classical RANSAC method presented in [this paper](http://www.cs.ait.ac.th/~mdailey/cvreadings/Fischler-RANSAC.pdf). This model has been chosen to be the representative of Feature-Learning methods, due to its simplicity and yet its effectiveness.
 
 ### FMR
-`fmr` package contains the code for the implementation of the algorithm described [here](https://arxiv.org/pdf/2005.01014.pdf). The strength of this method relies on its robustness to noise, outliers and density difference (in contrast with "geometric" methods as the ones previously introduced), its fastness and it high accuracy.  
+`fmr` folder contains the code for the implementation of the algorithm described [here](https://arxiv.org/pdf/2005.01014.pdf). The strength of this method relies on its robustness to noise, outliers and density difference (in contrast with "geometric" methods as the ones previously introduced), its fastness and it high accuracy.  
 Please find more information about the model in the relative paper.
 
 ***
