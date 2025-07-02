@@ -1,22 +1,25 @@
 # Time-of-Flight Cameras in Space: Pose Estimation with Deep Learning Methodologies
-This research, based on the master thesis of the author, is focused on the development of a NN-based approach for Object Detection and 6 DoF Pose Estimation with ToF Cameras for space applications. The aim is that of designing a NN-based approach able to detect a part of a satellite (such as a gripping interface) and estimate its 6 DoF pose to support on-orbit servicing missions.  
-Please note that the project is based on `Python v3.8.12`, `TensorFlow v2.6.0` and `PyTorch v1.9.1`, and it is built upon `MacOS BigSur v11.3.1`.
 
-`main.py` is the starting script: it retrieves the camera interface available for recordings and it begins the data acquisition.   
+[![paper](https://img.shields.io/badge/Paper_Link-blue)](https://ieeexplore.ieee.org/abstract/document/10013574)
+
+This research, based on the master's thesis of the author, is focused on the development of an NN-based approach for Object Detection and 6 DoF Pose Estimation with ToF Cameras for space applications, published at the **IEEE AICT 2022 Conference**. The aim is to design an NN-based approach able to detect a part of a satellite (such as a gripping interface) and estimate its 6 DoF pose to support on-orbit servicing missions.  
+Please note that the project is based on `Python v3.8.12`, `TensorFlow v2.6.0`, and `PyTorch v1.9.1`, and it is built upon `MacOS BigSur v11.3.1`.
+
+`main.py` is the starting script: it retrieves the camera interface available for recordings, and it begins the data acquisition.   
 
 ***
 
 ## Data Acquisition
-In order to make this code works, after having downloaded the software from the official site, the right `.zip` folder has to be extracted and placed into this one, so that `_roypy.so` image can be found by the scripts.
+In order to make this code work, after having downloaded the software from the official site, the right `.zip` folder has to be extracted and placed into this one, so that `_roypy.so` image can be found by the scripts.
 
 `utils` folder contains the scripts for acquiring data in real-time, using both Open3D for point cloud drawings and OpenCV for depth maps and amplitude images visualization.   
 
 ### OpenCV
-`camera_imagedata.py` script captures image data, filling OpenCV images and displaying data with HighGUI.  
+`camera_imagedata.py` script captures image data, fills OpenCV images, and displays data with HighGUI.  
 OpenCV can be downloaded [here](https://opencv.org/releases/).
 
 ### Open3D
-`camera_3d.py` script captures depth maps and visualizes 3D Point Clouds dinamically changing.  
+`camera_3d.py` script captures depth maps and visualizes 3D Point Clouds dynamically changing.  
 Please find more details about the library [here](http://www.open3d.org/docs/release/).
 
 ### OpenCV and Open3D
@@ -42,31 +45,31 @@ Please find more details about the algorithm in the linked paper.
 `pcd_registration` folder contains the code for the point-cloud registration between a 3D satellite model target and the source acquired one. Three state-of-the-art models are currently taken into account to perform this final task, namely `Fast Global Registration (FGR)`, `FPFH + RANSAC Registration (FRR)`, and `Feature-Metric Registration (FMR)`.
 
 ### FGR
-`fast_global_registration.py` implements the fast global registration approach, that is described [here](http://vladlen.info/papers/fast-global-registration.pdf). It achieves state-of-the-art results for what concerns Optimization-Based methods. 
+`fast_global_registration.py` implements the fast global registration approach, which is described [here](http://vladlen.info/papers/fast-global-registration.pdf). It achieves state-of-the-art results for what concerns Optimization-Based methods. 
 
 ### FRR (FPFH + RANSAC Registration)
 `global_registration.py` approach uses FTFH features extraction as described [here](https://www.cvl.iis.u-tokyo.ac.jp/class2016/2016w/papers/6.3DdataProcessing/Rusu_FPFH_ICRA2009.pdf), followed by the classical RANSAC method presented in [this paper](http://www.cs.ait.ac.th/~mdailey/cvreadings/Fischler-RANSAC.pdf). This model has been chosen to be the representative of Feature-Learning methods, due to its simplicity and yet its effectiveness.
 
 ### FMR
-`fmr` folder contains the code for the implementation of the algorithm described [here](https://arxiv.org/pdf/2005.01014.pdf). The strength of this method relies on its robustness to noise, outliers and density difference (in contrast with "geometric" methods as the ones previously introduced), its fastness and it high accuracy.  
-Please find more information about the model in the relative paper.
+`fmr` folder contains the code for the implementation of the algorithm described [here](https://arxiv.org/pdf/2005.01014.pdf). The strength of this method relies on its robustness to noise, outliers, and density difference (in contrast with "geometric" methods, as the ones previously introduced), its speed, and its high accuracy.  
+Please find more information about the model in the relevant paper.
 
 ***
 
 ## Results
 
 ### Denoising Approaches
-To reduce the complexity of the proposed SHARP-Net, two variants are proposed, ToF-KPN (based on a U-Net model built upon an autoencoder with skip connections) and a reduced version of SHARP-Net without the last two blocks.   
+To reduce the complexity of the proposed SHARP-Net, two variants are proposed: ToF-KPN (based on a U-Net model built upon an autoencoder with skip connections) and a reduced version of SHARP-Net without the last two blocks.   
 The following images show the results of the denoising approaches: ToF-KPN always obtains the worst outcomes, while the two variants of SHARP-Net get very similar ones.
 
 ![Denoised Depth Images](results/denoising/denoised_depth_images.png)
 ![Denoised Point Clouds](results/denoising/denoised_point_clouds.png)
 
 By considering the execution times, ToF-KPN is always the fastest, being the simplest model. The original SHARP-Net is the slowest, while its smaller variant achieves very good results in almost half the time required by SHARP-Net.  
-Thus, its low complexity, its online performance and the optimal results make it a perfect candidate for this work.
+Thus, its low complexity, its online performance, and the optimal results make it a perfect candidate for this work.
 
 ### PCD Registration Approaches
-Several starting poses for the source and different sizes for the target are considered to evaluate the performance and the robustness of the registration approaches. Feature-Metric Registration clearly outperforms all the others regardless of the starting position of the source point cloud and the dimensionality of the target one. 
+Several starting poses for the source and different sizes for the target are considered to evaluate the performance and the robustness of the registration approaches. Feature-Metric Registration clearly outperforms all the others, regardless of the starting position of the source point cloud and the dimensionality of the target one. 
 
 ![PCD Registration Pose 1](results/pcd_registration/pose1.png)
 ![PCD Registration Pose 2](results/pcd_registration/pose2.png)
